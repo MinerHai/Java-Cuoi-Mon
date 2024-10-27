@@ -10,6 +10,12 @@ package model;
  */
 public class Users {
 
+    public Users(String Username, String Pass, String Role) {
+        this.Username = Username;
+        this.Pass = Pass;
+        this.Role = Role;
+    }
+
     public Users(String Username, String Pass) {
         this.Username = Username;
         this.Pass = Pass;

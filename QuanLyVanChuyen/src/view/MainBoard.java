@@ -4,6 +4,13 @@
  */
 package view;
 
+import controller.userController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Users;
+
 /**
  *
  * @author Dell
@@ -13,9 +20,32 @@ public class MainBoard extends javax.swing.JFrame {
     /**
      * Creates new form MainBoard
      */
+    private userController user_controller;
+    private DefaultTableModel tableModel;
+
     public MainBoard() {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        user_controller = new userController();
+        loadData_user();
+    }
+
+    public void loadData_user() {
+        tableModel = new DefaultTableModel(new String[]{"User ID", "User name", "Password", "Role"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;  // Không cho phép chỉnh sửa ô
+            }
+        };
+        for (Users u : user_controller.getdsUser()) {
+            tableModel.addRow(new Object[]{u.getUserId(), u.getUsername(), u.getPass(), u.getRole()});
+        }
+        table.setModel(tableModel);
+    }
+
+    void ClearTxt() {
+        txtUsername.setText("");
+        txtPassword.setText("");
     }
 
     /**
@@ -39,18 +69,19 @@ public class MainBoard extends javax.swing.JFrame {
         btnCTDonHang = new javax.swing.JButton();
         AdminPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        btnQLDonHang1 = new javax.swing.JButton();
-        btnQLXe3 = new javax.swing.JButton();
-        btnQLXe5 = new javax.swing.JButton();
+        btnUser_Them = new javax.swing.JButton();
+        btnUser_Xoa = new javax.swing.JButton();
+        btnUser_Sua = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cbbRole = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        lbError = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -132,17 +163,32 @@ public class MainBoard extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(0, 92, 103));
 
-        btnQLDonHang1.setBackground(java.awt.Color.orange);
-        btnQLDonHang1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQLDonHang1.setText("Thêm");
+        btnUser_Them.setBackground(java.awt.Color.orange);
+        btnUser_Them.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUser_Them.setText("Thêm");
+        btnUser_Them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUser_ThemActionPerformed(evt);
+            }
+        });
 
-        btnQLXe3.setBackground(java.awt.Color.orange);
-        btnQLXe3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQLXe3.setText("Xóa");
+        btnUser_Xoa.setBackground(java.awt.Color.orange);
+        btnUser_Xoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUser_Xoa.setText("Xóa");
+        btnUser_Xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUser_XoaActionPerformed(evt);
+            }
+        });
 
-        btnQLXe5.setBackground(java.awt.Color.orange);
-        btnQLXe5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQLXe5.setText("Sửa");
+        btnUser_Sua.setBackground(java.awt.Color.orange);
+        btnUser_Sua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUser_Sua.setText("Sửa");
+        btnUser_Sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUser_SuaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -150,11 +196,11 @@ public class MainBoard extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnQLDonHang1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUser_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnQLXe3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUser_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnQLXe5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUser_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -162,29 +208,38 @@ public class MainBoard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(7, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnQLDonHang1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQLXe3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQLXe5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUser_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUser_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUser_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 92, 103), 2, true));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Role");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Password");
 
         cbbRole.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
+        cbbRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbRoleActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Username:");
+
+        lbError.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbError.setForeground(java.awt.Color.red);
+        lbError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -193,8 +248,8 @@ public class MainBoard extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
+                    .addComponent(txtUsername)
+                    .addComponent(txtPassword)
                     .addComponent(cbbRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,6 +258,10 @@ public class MainBoard extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(lbError)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,20 +269,22 @@ public class MainBoard extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(4, 4, 4)
                 .addComponent(cbbRole, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbError)
+                .addGap(52, 52, 52))
         );
 
-        jTable1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 92, 103), 2, true));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 92, 103), 2, true));
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -234,7 +295,12 @@ public class MainBoard extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(table);
 
         javax.swing.GroupLayout AdminPanelLayout = new javax.swing.GroupLayout(AdminPanel);
         AdminPanel.setLayout(AdminPanelLayout);
@@ -274,6 +340,59 @@ public class MainBoard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUser_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUser_ThemActionPerformed
+        // TODO add your handling code here:
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        String role = (String) cbbRole.getSelectedItem();
+        if (user_controller.add_user(new Users(username, password, role))) {
+            JOptionPane.showMessageDialog(this, "Đăng kí thành công");
+            ClearTxt();
+            loadData_user();
+        } else {
+            lbError.setText("Vui lòng kiểm tra lại!!");
+        }
+    }//GEN-LAST:event_btnUser_ThemActionPerformed
+
+    private void cbbRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbRoleActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow != -1) {
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+            txtUsername.setText(model.getValueAt(selectedRow, 1).toString());
+            txtPassword.setText(model.getValueAt(selectedRow, 2).toString());
+            String role = model.getValueAt(selectedRow, 3).toString();
+            cbbRole.setSelectedItem(role);
+        }
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void btnUser_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUser_XoaActionPerformed
+        // TODO add your handling code here:
+        String username = txtUsername.getText();
+        if (user_controller.remove_user(username)) {
+            JOptionPane.showMessageDialog(this, "Xóa user: " + username + " thành công");
+            ClearTxt();
+            loadData_user();
+        }
+    }//GEN-LAST:event_btnUser_XoaActionPerformed
+
+    private void btnUser_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUser_SuaActionPerformed
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        String role = (String)cbbRole.getSelectedItem();
+        if (user_controller.edit_user(new Users(username, password, role)));
+        {
+            JOptionPane.showMessageDialog(this, "Thay đổi thành công!!!");
+            ClearTxt();
+            loadData_user();
+        }
+    }//GEN-LAST:event_btnUser_SuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,10 +434,10 @@ public class MainBoard extends javax.swing.JFrame {
     private javax.swing.JButton btnCTDonHang;
     private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnQLDonHang;
-    private javax.swing.JButton btnQLDonHang1;
     private javax.swing.JButton btnQLXe;
-    private javax.swing.JButton btnQLXe3;
-    private javax.swing.JButton btnQLXe5;
+    private javax.swing.JButton btnUser_Sua;
+    private javax.swing.JButton btnUser_Them;
+    private javax.swing.JButton btnUser_Xoa;
     private javax.swing.JComboBox<String> cbbRole;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
@@ -331,9 +450,10 @@ public class MainBoard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JLabel lbError;
+    private javax.swing.JTable table;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

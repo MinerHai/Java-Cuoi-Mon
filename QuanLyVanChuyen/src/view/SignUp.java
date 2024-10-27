@@ -5,6 +5,9 @@
 package view;
 
 import controller.userController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -313,13 +316,17 @@ public class SignUp extends javax.swing.JFrame {
         String password = new String(txtPassword.getPassword());
         String confirmPW = new String(txtConfirmPassword.getPassword());
         
-        if (user_controller.signup_user(userName, password, confirmPW)){
-            
-            this.dispose();
-            new Login().setVisible(true);
-        }
-        else{
-            lbError.setText("Vui lòng kiểm tra lại dữ liệu nhập vào!!");
+        try {
+            if (user_controller.signup_user(userName, password, confirmPW)){
+                JOptionPane.showMessageDialog(null, "Đăng kí thành công");
+                this.dispose();
+                new Login().setVisible(true);
+            }
+            else{
+                lbError.setText("Vui lòng kiểm tra lại dữ liệu nhập vào!!");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnDangKiActionPerformed
 

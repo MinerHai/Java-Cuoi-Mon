@@ -11,6 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,10 +21,14 @@ import java.sql.SQLException;
  */
 public class userDAO {
 
+    public userDAO() {
+        this.conn = Dbconnection.getConnection();
+    }
+    private Connection conn;
+
     public boolean login(Users user) {
         String qr = "SELECT * FROM Users WHERE Username = ? and Pass = ?";
         try {
-            Connection conn = Dbconnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(qr);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPass());
@@ -36,14 +43,21 @@ public class userDAO {
     public boolean signUp(Users user) {
         String qr = "INSERT INTO USERS(Username, Pass, Role) VALUES(?,?, 'User')";
         try {
-            Connection conn = Dbconnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(qr);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPass());
             ps.execute();
             return true;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            if (ex.getErrorCode() == 2627 || ex.getErrorCode() == 2601) {
+                JOptionPane.showMessageDialog(null, "Người dùng đã tồn tại");
+                try {
+                    throw new SQLException("Lỗi: ID đã tồn tại trong cơ sở dữ liệu.", ex);
+                } catch (SQLException ex1) {
+                    Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+
+            }
             return false;
         }
     }
@@ -52,7 +66,6 @@ public class userDAO {
         List<Users> ds = new ArrayList<>();
         String qr = "SELECT * FROM Users";
         try {
-            Connection conn = Dbconnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(qr);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -66,6 +79,55 @@ public class userDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return ds;
+        }
+    }
+
+    public boolean Add_User(Users user) {
+        String qr = "INSERT INTO USERS(Username, Pass, Role) VALUES(?,?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(qr);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPass());
+            ps.setString(3, user.getRole());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            if (ex.getErrorCode() == 2627 || ex.getErrorCode() == 2601) {
+                JOptionPane.showMessageDialog(null, "Người dùng đã tồn tại");
+                try {
+                    throw new SQLException("Lỗi: ID đã tồn tại trong cơ sở dữ liệu.", ex);
+                } catch (SQLException ex1) {
+                    Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            }
+            return false;
+        }
+    }
+
+    public boolean Remove_User(String username) {
+        String qr = "DELETE FROM USERS WHERE username = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(qr);
+            ps.setString(1, username);
+            ps.execute();
+            return true;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    public boolean Edit_User(Users user){
+        String qr = "UPDATE USERS SET Pass = ?, Role = ? WHERE Username = ?" ;
+        try{
+            PreparedStatement ps = conn.prepareStatement(qr);
+            ps.setString(1, user.getPass());
+            ps.setString(2, user.getRole());
+            ps.setString(3, user.getUsername());
+            ps.execute();
+            return true;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
         }
     }
 }
