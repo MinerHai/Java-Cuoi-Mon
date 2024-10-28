@@ -208,8 +208,9 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
-        if (user_controller.login_user(new Users(username, password))){
-            new MainBoard().setVisible(true);
+        Users user_logged = user_controller.login_user(username, password);
+        if (user_logged != null){
+            new MainBoard(user_logged).setVisible(true);
             this.dispose();
         }
         else{

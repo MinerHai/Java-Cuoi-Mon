@@ -22,12 +22,12 @@ public class userController {
         USERDAO = new userDAO();
     }
 
-    public boolean login_user(Users user) {
-        if (user.getUsername().isEmpty() || user.getPass().isEmpty()) {
+    public Users login_user(String username, String password) {
+        if (username.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
-            return false;
+            return null;
         } else {
-            return USERDAO.login(user);
+            return USERDAO.login(username,password);
         }
     }
 

@@ -26,17 +26,24 @@ public class userDAO {
     }
     private Connection conn;
 
-    public boolean login(Users user) {
+    public Users login(String username, String password) {
         String qr = "SELECT * FROM Users WHERE Username = ? and Pass = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(qr);
-            ps.setString(1, user.getUsername());
-            ps.setString(2, user.getPass());
+            ps.setString(1, username);
+            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
-            return rs.next();
+            if (rs.next()) {
+                int id = rs.getInt("UserId");
+                String role = rs.getString("Role");
+               return new Users(id, username, password, role);
+            }
+            else {
+                return null;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -111,21 +118,22 @@ public class userDAO {
             ps.setString(1, username);
             ps.execute();
             return true;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
     }
-    public boolean Edit_User(Users user){
-        String qr = "UPDATE USERS SET Pass = ?, Role = ? WHERE Username = ?" ;
-        try{
+
+    public boolean Edit_User(Users user) {
+        String qr = "UPDATE USERS SET Pass = ?, Role = ? WHERE Username = ?";
+        try {
             PreparedStatement ps = conn.prepareStatement(qr);
             ps.setString(1, user.getPass());
             ps.setString(2, user.getRole());
             ps.setString(3, user.getUsername());
             ps.execute();
             return true;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }

@@ -22,8 +22,10 @@ public class MainBoard extends javax.swing.JFrame {
      */
     private userController user_controller;
     private DefaultTableModel tableModel;
+    private static Users user_logged;
 
-    public MainBoard() {
+    public MainBoard(Users user_logged) {
+        this.user_logged = user_logged;
         initComponents();
         setLocationRelativeTo(null);
         user_controller = new userController();
@@ -41,6 +43,14 @@ public class MainBoard extends javax.swing.JFrame {
             tableModel.addRow(new Object[]{u.getUserId(), u.getUsername(), u.getPass(), u.getRole()});
         }
         table.setModel(tableModel);
+        lbUsername.setText(user_logged.getUsername());
+        if (!user_logged.getRole().equals("Admin")) {
+            int index = tabbedPane.indexOfComponent(AdminPanel);
+            if (index != -1) {
+                tabbedPane.remove(index);  // Xóa tab nếu không phải admin
+            }
+        }
+
     }
 
     void ClearTxt() {
@@ -60,13 +70,16 @@ public class MainBoard extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        tabbedPane = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        btnQLDonHang = new javax.swing.JButton();
         btnQLXe = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
         btnCTDonHang = new javax.swing.JButton();
+        btnQLDonHang = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        lbUsername = new javax.swing.JLabel();
         AdminPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btnUser_Them = new javax.swing.JButton();
@@ -100,10 +113,6 @@ public class MainBoard extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 92, 103));
 
-        btnQLDonHang.setBackground(java.awt.Color.orange);
-        btnQLDonHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQLDonHang.setText("Quản lý đơn hàng");
-
         btnQLXe.setBackground(java.awt.Color.orange);
         btnQLXe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnQLXe.setText("Quản lý xe");
@@ -111,39 +120,83 @@ public class MainBoard extends javax.swing.JFrame {
         btnDangXuat.setBackground(java.awt.Color.orange);
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDangXuat.setText("Đăng xuất");
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
 
         btnCTDonHang.setBackground(java.awt.Color.orange);
         btnCTDonHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCTDonHang.setText("Chi tiết đơn hàng");
+
+        btnQLDonHang.setBackground(java.awt.Color.orange);
+        btnQLDonHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnQLDonHang.setText("Quản lý đơn hàng");
+
+        jPanel5.setBackground(java.awt.Color.orange);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Xin chào, ");
+
+        lbUsername.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbUsername.setForeground(new java.awt.Color(255, 0, 0));
+        lbUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbUsername.setText("UserName");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbUsername)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel4)
+                .addComponent(lbUsername))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnQLXe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnQLDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                    .addComponent(btnCTDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnQLXe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCTDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnQLDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(44, 44, 44)
                 .addComponent(btnDangXuat)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(20, 20, 20)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addComponent(btnQLDonHang, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(44, 44, 44)
                 .addComponent(btnQLXe, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(44, 44, 44)
                 .addComponent(btnCTDonHang, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(btnDangXuat)
-                .addGap(16, 16, 16))
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -159,7 +212,7 @@ public class MainBoard extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Home", jPanel2);
+        tabbedPane.addTab("Home", jPanel2);
 
         jPanel4.setBackground(new java.awt.Color(0, 92, 103));
 
@@ -325,17 +378,17 @@ public class MainBoard extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane2.addTab("Admin", AdminPanel);
+        tabbedPane.addTab("Admin", AdminPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(tabbedPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(tabbedPane)
         );
 
         pack();
@@ -385,7 +438,7 @@ public class MainBoard extends javax.swing.JFrame {
     private void btnUser_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUser_SuaActionPerformed
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        String role = (String)cbbRole.getSelectedItem();
+        String role = (String) cbbRole.getSelectedItem();
         if (user_controller.edit_user(new Users(username, password, role)));
         {
             JOptionPane.showMessageDialog(this, "Thay đổi thành công!!!");
@@ -393,6 +446,20 @@ public class MainBoard extends javax.swing.JFrame {
             loadData_user();
         }
     }//GEN-LAST:event_btnUser_SuaActionPerformed
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        // TODO add your handling code here:
+        int confirmation = JOptionPane.showConfirmDialog(
+                null,
+                "Bạn có chắc chắn muốn đăng xuất??",
+                "Xác nhận",
+                JOptionPane.YES_NO_OPTION
+        );
+        if (confirmation == JOptionPane.YES_OPTION) {
+            new Login().setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnDangXuatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -424,7 +491,7 @@ public class MainBoard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainBoard().setVisible(true);
+                new MainBoard(user_logged).setVisible(true);
             }
         });
     }
@@ -443,15 +510,18 @@ public class MainBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lbError;
+    private javax.swing.JLabel lbUsername;
+    private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
