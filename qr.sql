@@ -1,4 +1,4 @@
-CREATE DATABASE QUANLYVANCHUYEN
+﻿CREATE DATABASE QUANLYVANCHUYEN
 
 CREATE TABLE KhachHang (
     MaKhachHang INT PRIMARY KEY IDENTITY(1,1),
@@ -34,7 +34,20 @@ CREATE TABLE Users(
     Role NVARCHAR(20) NOT NULL,
 );
 
+INSERT INTO KhachHang VALUES
+('Le tien hai', '0377586361','Vinh Phuc'),
+(N'Lò Văn Anh', '0396158395', 'NSơn La'),
+(N'Đinh Hải Dương', '0396158395', 'NThanh Hóa')
 
-INSERT INTO KhachHang
+INSERT INTO DonHang 
 VALUES
-('Le tien hai', '0377586361','Vinh Phuc')
+(1, '2024-10-28', N'Đang vận chuyển', N'Hàng cồng kềnh'),
+(2, '2024-1-10',N'Chờ xác nhận',N'Hàng dễ vỡ xin nhẹ tay'),
+(3,'2024-12-12',N'Giao thành công','')
+
+INSERT INTO XeVanChuyen
+VALUES
+('88C-F1-10235',N'Hoàng Minh Quân', 'Wave Alpha'),
+('37C-AB-20596',N'Lê Thiên An', 'SH Model'),
+('34C-F1-58234',N'Vũ Kim Quý', 'Wave Alpha')
+
