@@ -51,3 +51,6 @@ VALUES
 ('37C-AB-20596',N'Lê Thiên An', 'SH Model'),
 ('34C-F1-58234',N'Vũ Kim Quý', 'Wave Alpha')
 
+
+
+SELECT COUNT(*) FROM DonHang

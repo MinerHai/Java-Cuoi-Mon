@@ -9,7 +9,6 @@ package model;
  * @author Dell
  */
 public class Users {
-
     public Users(String Username, String Pass, String Role) {
         this.Username = Username;
         this.Pass = Pass;
