@@ -5,6 +5,9 @@
 package view;
 
 import controller.userController;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Users;
 
@@ -18,6 +21,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     private userController user_controller;
+
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -208,13 +212,23 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
-        if (user_controller.login_user(new Users(username, password))){
-            new MainBoard().setVisible(true);
-            this.dispose();
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
+            return;
         }
-        else{
-            lbError.setText("Tài khoản hoặc mật khẩu chưa chính xác !!");
+        try {
+            Users user_logged;
+            user_logged = user_controller.login_user(username, password);
+            if (user_logged != null) {
+                new MainBoard(user_logged).setVisible(true);
+                this.dispose();
+            } else {
+                lbError.setText("Tài khoản hoặc mật khẩu chưa chính xác !!");
+            }
+        } catch (Exception e) {
+
         }
+
     }//GEN-LAST:event_btnDnhapActionPerformed
 
     /**

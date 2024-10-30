@@ -312,12 +312,29 @@ public class SignUp extends javax.swing.JFrame {
 
     private void btnDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKiActionPerformed
         // TODO add your handling code here:
-        String userName = txtUsername.getText();
+        String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
         String confirmPW = new String(txtConfirmPassword.getPassword());
+        if (username.contains(" ")) {
+            JOptionPane.showMessageDialog(null, "User name không được chứa dấu cách!!");
+            return ;
+        }
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
+            return ;
+        }
+        if (username.length() <= 3 || password.length() <= 3) {
+            JOptionPane.showMessageDialog(null, "Ussername và Password yêu cầu có 4 kí tự trở lên!!");
+            return ;
+        }
+        if (!password.equals(confirmPW)) {
+            JOptionPane.showMessageDialog(null, "Mật khẩu confirm chưa trùng khớp!!");
+            return;
+        }
+
         
         try {
-            if (user_controller.signup_user(userName, password, confirmPW)){
+            if (user_controller.signup_user(username, password, confirmPW)){
                 JOptionPane.showMessageDialog(null, "Đăng kí thành công");
                 this.dispose();
                 new Login().setVisible(true);
