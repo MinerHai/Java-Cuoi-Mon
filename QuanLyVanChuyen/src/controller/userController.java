@@ -168,7 +168,7 @@ public class userController {
 
     public String get_solg_role(String role) {
         String solg = null;
-        String qr = "SELECT COUNT(Userid) as solg FROM Users Where Role = ? ";
+        String qr = "SELECT COUNT(*) as solg FROM Users Where Role = ? ";
         try {
             PreparedStatement ps = conn.prepareStatement(qr);
             ps.setString(1, role);
@@ -182,4 +182,6 @@ public class userController {
             return "null";
         }
     }
+    
 }
+
