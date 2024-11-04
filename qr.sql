@@ -54,3 +54,4 @@ VALUES
 
 
 SELECT COUNT(*) FROM DonHang
+SELECT * FROM DonHang WHERE (  NgayDatHang = '2024-01-10' AND TrangThai = 'Chờ xác nhận') OR ( MaDonHang = -1)

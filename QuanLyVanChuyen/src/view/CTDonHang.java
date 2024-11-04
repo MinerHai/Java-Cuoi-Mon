@@ -4,6 +4,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import model.DonHang;
 
 /**
@@ -19,6 +20,7 @@ public class CTDonHang extends javax.swing.JFrame {
     public CTDonHang(DonHang donhang) {
         initComponents();
         setLocationRelativeTo(null);
+        JOptionPane.showMessageDialog(this, donhang.getMaDonHang());
     }   
 
     /**
