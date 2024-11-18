@@ -11,6 +11,12 @@ package model;
  */
 public class XeVanChuyen {
 
+    public XeVanChuyen(String BienSo, String TaiXe, String LoaiXe) {
+        this.BienSo = BienSo;
+        this.TaiXe = TaiXe;
+        this.LoaiXe = LoaiXe;
+    }
+
     public XeVanChuyen(int maXe, String BienSo, String TaiXe, String LoaiXe) {
         this.maXe = maXe;
         this.BienSo = BienSo;

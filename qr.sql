@@ -6,6 +6,13 @@ CREATE TABLE KhachHang (
     SDT VARCHAR(15),
     DiaChi NVARCHAR(200)
 );
+
+ALTER TABLE DonHang
+ADD CONSTRAINT FK_DonHang_KhachHang FOREIGN KEY (MaKhachHang)
+REFERENCES KhachHang(MaKhachHang)
+ON DELETE CASCADE;
+
+
 CREATE TABLE DonHang (
     MaDonHang INT PRIMARY KEY IDENTITY(1,1),
     MaKhachHang INT FOREIGN KEY REFERENCES KhachHang(MaKhachHang),
@@ -13,12 +20,20 @@ CREATE TABLE DonHang (
     TrangThai NVARCHAR(50),
     GhiChu NVARCHAR(200)
 );
+ALTER TABLE DonHang
+ADD CONSTRAINT DF_NgayDatHang DEFAULT GETDATE() FOR NgayDatHang;
+ALTER TABLE DonHang
+ADD CONSTRAINT DF_TrangThai DEFAULT N'Chờ xác nhận' FOR TrangThai;
+
+
 CREATE TABLE XeVanChuyen (
     MaXe INT PRIMARY KEY IDENTITY(1,1),
     BienSo VARCHAR(20),
     TaiXe NVARCHAR(100),
     LoaiXe NVARCHAR(50)
 );
+ALTER TABLE XeVanChuyen
+ADD CONSTRAINT UQ_BienSo UNIQUE (BienSo);
 
 CREATE TABLE ChiTietVanChuyen (
     MaVanChuyen INT PRIMARY KEY IDENTITY(1,1),
@@ -27,6 +42,19 @@ CREATE TABLE ChiTietVanChuyen (
     NgayGiaoHang DATE,
     TrangThaiVanChuyen NVARCHAR(50)
 );
+ALTER TABLE ChiTietVanChuyen
+DROP COLUMN NgayGiaoHang;
+
+ALTER TABLE ChiTietVanChuyen
+ADD CONSTRAINT FK_ChiTietVanChuyen_DonHang FOREIGN KEY (MaDonHang)
+REFERENCES DonHang(MaDonHang)
+ON DELETE CASCADE;
+
+
+ALTER TABLE ChiTietVanChuyen
+ADD CONSTRAINT FK_ChiTietVanChuyen_XeVanChuyen FOREIGN KEY (MaXe)
+REFERENCES XeVanChuyen(MaXe)
+ON DELETE CASCADE;
 CREATE TABLE Users(
     UserId INT IDENTITY(1,1) PRIMARY KEY,
     Username NVARCHAR(50) NOT NULL UNIQUE,
@@ -55,3 +83,10 @@ VALUES
 
 SELECT COUNT(*) FROM DonHang
 SELECT * FROM DonHang WHERE (  NgayDatHang = '2024-01-10' AND TrangThai = 'Chờ xác nhận') OR ( MaDonHang = -1)
+
+SELECT * FROM ChiTietVanChuyen
+SELECT * FROM KhachHang
+SELECT * FROM XeVanChuyen
+ SELECT * FROM DonHang
+SELECT * FROM ChiTietVanChuyen WHERE MaDonHang = '8'
+DELETE DonHang WHERE MaDonHang = 7
