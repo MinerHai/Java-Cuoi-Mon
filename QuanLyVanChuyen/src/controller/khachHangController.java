@@ -69,11 +69,12 @@ public class khachHangController {
 
     public boolean edit_khachhang(KhachHang kh) throws SQLException {
         try {
-            String qr = "UPDATE KHACHHANG SET TenKhachHang = ?, SDT = ? WHERE MaKhachHang = ?";
+            String qr = "UPDATE KHACHHANG SET TenKhachHang = ?, SDT = ?, DiaChi = ? WHERE MaKhachHang = ?";
             PreparedStatement ps = conn.prepareStatement(qr);
             ps.setString(1, kh.getTenKhachHang());
             ps.setString(2, kh.getSdt());
-            ps.setInt(3, kh.getMaKhachHang());
+            ps.setString(3, kh.getDiachi());
+            ps.setInt(4, kh.getMaKhachHang());
             ps.execute();
             return true;
         } catch (SQLException ex) {

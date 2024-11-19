@@ -44,6 +44,7 @@ public class QLDonHang extends javax.swing.JFrame {
         kh_controller = new khachHangController();
         pt_controller = new vanChuyenController();
         loadData();
+        lbUsername.setText(user_logged.getUsername());
     }
 
     /**
@@ -98,7 +99,7 @@ public class QLDonHang extends javax.swing.JFrame {
         btnQLDonHang2 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        lbUsername1 = new javax.swing.JLabel();
+        lbUsername = new javax.swing.JLabel();
         btnQLDonHang3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtNgayNhan = new javax.swing.JTextField();
@@ -167,10 +168,10 @@ public class QLDonHang extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Xin chào, ");
 
-        lbUsername1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbUsername1.setForeground(new java.awt.Color(255, 0, 0));
-        lbUsername1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbUsername1.setText("UserName");
+        lbUsername.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbUsername.setForeground(new java.awt.Color(255, 0, 0));
+        lbUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbUsername.setText("UserName");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -180,14 +181,14 @@ public class QLDonHang extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbUsername1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel6)
-                .addComponent(lbUsername1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnQLDonHang3.setBackground(java.awt.Color.orange);
@@ -669,7 +670,7 @@ public class QLDonHang extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lbUsername1;
+    private javax.swing.JLabel lbUsername;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtMaDonhang;

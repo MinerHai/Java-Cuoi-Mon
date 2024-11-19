@@ -37,6 +37,7 @@ public class QLDuLieu extends javax.swing.JFrame {
         pt_controller = new vanChuyenController();
         loadData_KH();
         loadData_PT();
+        lbUsername.setText(user_logged.getUsername());
     }
 
     void kh_ClearTxt() {
@@ -126,7 +127,7 @@ public class QLDuLieu extends javax.swing.JFrame {
         btnQLDonHang3 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        lbUsername2 = new javax.swing.JLabel();
+        lbUsername = new javax.swing.JLabel();
         btnQLDonHang1 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -212,10 +213,10 @@ public class QLDuLieu extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Xin chào, ");
 
-        lbUsername2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbUsername2.setForeground(new java.awt.Color(255, 0, 0));
-        lbUsername2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbUsername2.setText("UserName");
+        lbUsername.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbUsername.setForeground(new java.awt.Color(255, 0, 0));
+        lbUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbUsername.setText("UserName");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -225,14 +226,14 @@ public class QLDuLieu extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbUsername2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel6)
-                .addComponent(lbUsername2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnQLDonHang1.setBackground(java.awt.Color.orange);
@@ -729,7 +730,7 @@ public class QLDuLieu extends javax.swing.JFrame {
             String name = txtTen_KH.getText();
             String sdt = txt_SDT_KH.getText();
             String diachi = txtDiaChi_KH.getText();
-            if (kh_controller.add_khachhang(name, sdt, diachi) == 0) {
+            if (kh_controller.add_khachhang(name, sdt, diachi) != 0) {
                 JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công!!");
                 loadData_KH();
                 kh_ClearTxt();
@@ -997,7 +998,7 @@ public class QLDuLieu extends javax.swing.JFrame {
     private javax.swing.JTable kh_table;
     private javax.swing.JLabel lbDiaChi;
     private javax.swing.JLabel lbDiaChi1;
-    private javax.swing.JLabel lbUsername2;
+    private javax.swing.JLabel lbUsername;
     private javax.swing.JPanel panelKhachHang;
     private javax.swing.JPanel panelPhuongTien;
     private javax.swing.JTable pt_table;
