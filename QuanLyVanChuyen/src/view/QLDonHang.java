@@ -193,7 +193,7 @@ public class QLDonHang extends javax.swing.JFrame {
 
         btnQLDonHang3.setBackground(java.awt.Color.orange);
         btnQLDonHang3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQLDonHang3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/box.png"))); // NOI18N
+        btnQLDonHang3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home.png"))); // NOI18N
         btnQLDonHang3.setText("Trang chủ");
         btnQLDonHang3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnQLDonHang3.addActionListener(new java.awt.event.ActionListener() {

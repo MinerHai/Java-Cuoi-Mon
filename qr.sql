@@ -90,3 +90,47 @@ SELECT * FROM XeVanChuyen
  SELECT * FROM DonHang
 SELECT * FROM ChiTietVanChuyen WHERE MaDonHang = '8'
 DELETE DonHang WHERE MaDonHang = 7
+
+INSERT INTO KhachHang (TenKhachHang, SDT, DiaChi) VALUES
+(N'Nguyễn Văn A', '0357123456', N'Hà Nội'),
+(N'Trần Thị B', '0389765432', N'Hải Phòng'),
+(N'Lê Văn C', '0377896543', N'Đà Nẵng'),
+(N'Phạm Văn D', '0391122334', N'Quảng Ninh'),
+(N'Hoàng Thị E', '0365566778', N'Thái Bình'),
+(N'Vũ Thị F', '0344455667', N'Nam Định'),
+(N'Đỗ Văn G', '0337788990', N'Hồ Chí Minh'),
+(N'Lý Thị H', '0321122334', N'Cần Thơ'),
+(N'Tô Văn I', '0313344556', N'Bắc Ninh'),
+(N'Huỳnh Thị K', '0309876543', N'Nha Trang');
+
+INSERT INTO DonHang (MaKhachHang, NgayDatHang, TrangThai, GhiChu) VALUES
+(21, '2024-11-01', N'Chờ xác nhận', N'Hàng dễ vỡ'),
+(22, '2024-11-02', N'Đang vận chuyển', N'Giao sau 5h chiều'),
+(23, '2024-11-03', N'Giao thành công', N'Khách yêu cầu kiểm tra hàng'),
+(24, '2024-11-04', N'Chờ xác nhận', N'Giao nhanh trước 12h'),
+(26, '2024-11-06', N'Đang vận chuyển', N'Trọng lượng nặng, cần xe lớn'),
+(27, '2024-11-07', N'Giao thành công', N''),
+(28, '2024-11-08', N'Chờ xác nhận', N'Đơn hàng số lượng lớn'),
+(29, '2024-11-09', N'Đang vận chuyển', N'Khách không liên lạc được'),
+(21, '2024-11-11', N'Giao thành công', N''),
+(22, '2024-11-12', N'Chờ xác nhận', N'Giao hàng nhanh'),
+(23, '2024-11-13', N'Đang vận chuyển', N'Hàng dễ vỡ, cần cẩn thận'),
+(24, '2024-11-14', N'Giao thành công', N'Khách phản hồi tích cực'),
+(25, '2024-11-15', N'Hủy đơn', N'Lỗi từ phía nhà cung cấp'),
+(26, '2024-11-16', N'Đang vận chuyển', N'Hàng chuyển sang ngày mai'),
+(27, '2024-11-17', N'Giao thành công', N'Hàng nguyên vẹn'),
+(28, '2024-11-18', N'Chờ xác nhận', N'Khách cần nhận vào sáng sớm'),
+(29, '2024-11-19', N'Đang vận chuyển', N'Không liên lạc được với tài xế')
+
+INSERT INTO ChiTietVanChuyen (MaDonHang, MaXe, TrangThaiVanChuyen) VALUES
+(41, 1, N'Đã nhận hàng từ kho'),
+(42, 2, N'Đang giao hàng'),
+(43, 3, N'Đã giao hàng'),
+(44, 1, N'Chưa giao hàng'),
+(45, 2, N'Hủy giao hàng'),
+(46, 3, N'Đang xử lý vận chuyển'),
+(47, 1, N'Giao hàng thành công'),
+(48, 2, N'Chờ giao'),
+(49, 3, N'Giao thất bại'),
+(50, 1, N'Đã hủy giao hàng');
+

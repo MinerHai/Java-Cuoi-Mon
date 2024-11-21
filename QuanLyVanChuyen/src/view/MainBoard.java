@@ -247,7 +247,7 @@ public class MainBoard extends javax.swing.JFrame {
 
         btnHome.setBackground(new java.awt.Color(255, 153, 51));
         btnHome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/box.png"))); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home.png"))); // NOI18N
         btnHome.setText("Trang chủ");
         btnHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnHome.addActionListener(new java.awt.event.ActionListener() {

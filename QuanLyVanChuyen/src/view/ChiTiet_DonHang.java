@@ -104,7 +104,7 @@ public class ChiTiet_DonHang extends javax.swing.JFrame {
         btnLuu = new javax.swing.JButton();
         Quit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(224, 224, 224));
 

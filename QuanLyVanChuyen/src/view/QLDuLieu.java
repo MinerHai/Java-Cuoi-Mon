@@ -238,7 +238,7 @@ public class QLDuLieu extends javax.swing.JFrame {
 
         btnQLDonHang1.setBackground(java.awt.Color.orange);
         btnQLDonHang1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQLDonHang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/box.png"))); // NOI18N
+        btnQLDonHang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home.png"))); // NOI18N
         btnQLDonHang1.setText("Trang chủ");
         btnQLDonHang1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnQLDonHang1.addActionListener(new java.awt.event.ActionListener() {
@@ -436,7 +436,7 @@ public class QLDuLieu extends javax.swing.JFrame {
                 .addComponent(btn_KH_Tim)
                 .addGap(46, 46, 46)
                 .addComponent(txt_KH_Tim, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,7 +541,7 @@ public class QLDuLieu extends javax.swing.JFrame {
                     .addComponent(txt_PT_TaiXe)
                     .addComponent(txt_PT_BienSo)
                     .addComponent(txt_PT_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
             .addGroup(jPanel10Layout.createSequentialGroup()
