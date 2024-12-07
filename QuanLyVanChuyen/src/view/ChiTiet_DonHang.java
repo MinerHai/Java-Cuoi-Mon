@@ -4,9 +4,11 @@
  */
 package view;
 
+import controller.XuatFile;
 import controller.donHangController;
 import controller.khachHangController;
 import controller.vanChuyenController;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import model.DonHang;
 import model.KhachHang;
@@ -103,6 +105,7 @@ public class ChiTiet_DonHang extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         btnLuu = new javax.swing.JButton();
         Quit = new javax.swing.JButton();
+        btnInFIle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -340,15 +343,27 @@ public class ChiTiet_DonHang extends javax.swing.JFrame {
             }
         });
 
+        btnInFIle.setBackground(java.awt.Color.orange);
+        btnInFIle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnInFIle.setText("In File");
+        btnInFIle.setActionCommand("");
+        btnInFIle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInFIleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addComponent(Quit, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btnInFIle, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(Quit, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
         jPanel4Layout.setVerticalGroup(
@@ -356,7 +371,8 @@ public class ChiTiet_DonHang extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLuu)
-                    .addComponent(Quit))
+                    .addComponent(Quit)
+                    .addComponent(btnInFIle))
                 .addGap(0, 17, Short.MAX_VALUE))
         );
 
@@ -431,6 +447,22 @@ public class ChiTiet_DonHang extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnLuuActionPerformed
 
+    private void btnInFIleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInFIleActionPerformed
+        // TODO add your handling code here:
+        String data = "Phieu Don Hang\n"
+            + "-------------------------\n"
+            + "Ma Don Hang: " +lbMaDonHang.getText() + "\n"
+            + "Ngay tao don: " + lbNgayNhan.getText() + "\n"
+            + "Ma Khach Hang: " + lbMaKH.getText() + "\n"
+            + "Ten Khach Hang: " + lbTenKH.getText() + "\n"
+            + "So Dien Thoai: " + lbSDT.getText() + "\n"
+            + "Dia Chi: " + lbDiaChi.getText() + "\n"
+            + "Ghi Chu: " + lbGhiChu.getText() + "\n"
+            + "-------------------------\n"
+            + "Ngay In File: " + LocalDate.now();
+        new XuatFile().exportToPDF(data);
+    }//GEN-LAST:event_btnInFIleActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -468,6 +500,7 @@ public class ChiTiet_DonHang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Quit;
+    private javax.swing.JButton btnInFIle;
     private javax.swing.JButton btnLuu;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;

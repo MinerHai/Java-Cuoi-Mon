@@ -14,6 +14,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.io.FileOutputStream;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
 
 /**
  *
@@ -77,6 +82,47 @@ public class XuatFile {
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi xuất file Excel.");
+        }
+    }
+
+    public static void exportToPDF(String data) {
+        try {
+            // Đường dẫn và tên file
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Chọn vị trí lưu file PDF");
+            fileChooser.setSelectedFile(new java.io.File("Invoice.pdf"));
+
+            int userSelection = fileChooser.showSaveDialog(null);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                java.io.File fileToSave = fileChooser.getSelectedFile();
+                String filePath = fileToSave.getAbsolutePath();
+
+                // Thêm đuôi .pdf nếu không có
+                if (!filePath.toLowerCase().endsWith(".pdf")) {
+                    filePath += ".pdf";
+                }
+
+                // Khởi tạo Document và PdfWriter
+                Document document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream(filePath));
+
+                // Mở Document
+                document.open();
+                // Thêm nội dung vào PDF
+                for (String line : data.split("\n")) {
+                    document.add(new Paragraph(line));
+                }
+
+                // Đóng Document
+                document.close();
+
+                // Hiển thị thông báo thành công
+                JOptionPane.showMessageDialog(null, "File đã được lưu tại: " + filePath);
+            }
+
+        } catch (DocumentException | FileNotFoundException ex) {
+            // Xử lý lỗi nếu có
+            JOptionPane.showMessageDialog(null, "Lỗi khi tạo file PDF: " + ex.getMessage());
         }
     }
 }
