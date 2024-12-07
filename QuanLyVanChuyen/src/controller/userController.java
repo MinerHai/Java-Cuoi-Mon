@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.DigestUtils;
 import model.Users;
 
 /**
@@ -106,14 +105,26 @@ public class userController {
         }
     }
 
-    public boolean edit_user(Users user) {
-        String qr = "UPDATE USERS SET Pass = ?, Role = ? WHERE Username = ?";
+    public boolean change_role(String username, String role) {
+        String qr = "UPDATE USERS SET Role = ? WHERE Username = ?";
         try {
-            String hashPassword = digestUtils.hashPassword(user.getPass());
+            PreparedStatement ps = conn.prepareStatement(qr);
+            ps.setString(1, role);
+            ps.setString(2, username);
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    public boolean change_password(String username, String newPass){
+        String qr = "UPDATE USERS SET Pass = ?  WHERE Username = ?";
+        try {
+            String hashPassword = digestUtils.hashPassword(newPass);
             PreparedStatement ps = conn.prepareStatement(qr);
             ps.setString(1, hashPassword);
-            ps.setString(2, user.getRole());
-            ps.setString(3, user.getUsername());
+            ps.setString(2, username);
             ps.execute();
             return true;
         } catch (SQLException ex) {

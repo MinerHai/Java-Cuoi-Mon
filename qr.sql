@@ -80,14 +80,15 @@ VALUES
 ('34C-F1-58234',N'Vũ Kim Quý', 'Wave Alpha')
 
 
-
+SELECT UserID, Username, Role FROM Users
 SELECT COUNT(*) FROM DonHang
 SELECT * FROM DonHang WHERE (  NgayDatHang = '2024-01-10' AND TrangThai = 'Chờ xác nhận') OR ( MaDonHang = -1)
 
+SELECT * FROM Users
 SELECT * FROM ChiTietVanChuyen
 SELECT * FROM KhachHang
 SELECT * FROM XeVanChuyen
- SELECT * FROM DonHang
+SELECT * FROM DonHang
 SELECT * FROM ChiTietVanChuyen WHERE MaDonHang = '8'
 DELETE DonHang WHERE MaDonHang = 7
 
@@ -133,4 +134,8 @@ INSERT INTO ChiTietVanChuyen (MaDonHang, MaXe, TrangThaiVanChuyen) VALUES
 (48, 2, N'Chờ giao'),
 (49, 3, N'Giao thất bại'),
 (50, 1, N'Đã hủy giao hàng');
+
+
+
+
 

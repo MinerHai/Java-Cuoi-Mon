@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.XuatFile;
 import controller.donHangController;
 import controller.khachHangController;
 import controller.vanChuyenController;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import model.DonHang;
 import model.Users;
@@ -329,7 +331,7 @@ public class QLDonHang extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addGap(70, 70, 70)
                 .addComponent(btnThem)
                 .addGap(86, 86, 86)
                 .addComponent(btnXoa)

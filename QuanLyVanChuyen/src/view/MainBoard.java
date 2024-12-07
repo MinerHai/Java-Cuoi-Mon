@@ -48,21 +48,21 @@ public class MainBoard extends javax.swing.JFrame {
     }
 
     public void loadData_user() {
-        tableModel = new DefaultTableModel(new String[]{"User ID", "User name", "Password", "Role"}, 0) {
+        tableModel = new DefaultTableModel(new String[]{"User ID", "User name", "Role"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;  // Không cho phép chỉnh sửa ô
             }
         };
         for (Users u : user_controller.getdsUser()) {
-            tableModel.addRow(new Object[]{u.getUserId(), u.getUsername(), u.getPass(), u.getRole()});
+            tableModel.addRow(new Object[]{u.getUserId(), u.getUsername(), u.getRole()});
         }
         table.setModel(tableModel);
         lbUsername.setText(user_logged.getUsername());
         if (!user_logged.getRole().equals("Admin")) {
             int index = tabbedPane.indexOfComponent(AdminPanel);
             if (index != -1) {
-                tabbedPane.remove(index);  
+                tabbedPane.remove(index);
             }
         }
     }
@@ -112,6 +112,7 @@ public class MainBoard extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         lbUsername = new javax.swing.JLabel();
         btnHome = new javax.swing.JButton();
+        btnDoiMatKhau = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         lbSolgDonHang = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -142,11 +143,11 @@ public class MainBoard extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         txtUsername = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cbbRole = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         lbError = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
@@ -256,21 +257,37 @@ public class MainBoard extends javax.swing.JFrame {
             }
         });
 
+        btnDoiMatKhau.setBackground(new java.awt.Color(255, 255, 0));
+        btnDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDoiMatKhau.setText("Đổi mật khẩu");
+        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiMatKhauActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(btnDangXuat)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnQLDuLieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnQLDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnQLDuLieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnQLDonHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(btnDangXuat))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -285,6 +302,8 @@ public class MainBoard extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(btnQLDuLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDoiMatKhau)
+                .addGap(18, 18, 18)
                 .addComponent(btnDangXuat)
                 .addGap(31, 31, 31))
         );
@@ -588,9 +607,9 @@ public class MainBoard extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnUser_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnUser_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(btnUser_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -608,11 +627,10 @@ public class MainBoard extends javax.swing.JFrame {
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 92, 103), 2, true));
 
         txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtUsername.setRequestFocusEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Role");
-
-        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Password");
@@ -632,27 +650,33 @@ public class MainBoard extends javax.swing.JFrame {
         lbError.setForeground(java.awt.Color.red);
         lbError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsername)
-                    .addComponent(txtPassword)
-                    .addComponent(cbbRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(txtUsername)
+                            .addComponent(cbbRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 231, Short.MAX_VALUE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(lbError)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtPassword)))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(lbError)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -664,12 +688,12 @@ public class MainBoard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(4, 4, 4)
                 .addComponent(cbbRole, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addComponent(lbError)
                 .addGap(52, 52, 52))
         );
@@ -780,19 +804,19 @@ public class MainBoard extends javax.swing.JFrame {
     private void btnUser_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUser_ThemActionPerformed
         // TODO add your handling code here:
         String username = txtUsername.getText();
-        String password = txtPassword.getText();
+        String password = new String(txtPassword.getPassword());
         String role = (String) cbbRole.getSelectedItem();
         if (username.contains(" ")) {
             JOptionPane.showMessageDialog(null, "User name không được chứa dấu cách!!");
-            return ;
+            return;
         }
         if (username.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
-            return ;
+            return;
         }
         if (username.length() <= 3 || password.length() <= 3) {
             JOptionPane.showMessageDialog(null, "Ussername và Password yêu cầu có 4 kí tự trở lên!!");
-            return ;
+            return;
         }
         try {
             if (user_controller.add_user(username, password, role)) {
@@ -806,7 +830,7 @@ public class MainBoard extends javax.swing.JFrame {
             Logger.getLogger(MainBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnUser_ThemActionPerformed
-    
+
     private void createChart() {
         int slg_giaothanhcong = donhang_controller.get_solg_donhang("Giao thành công");
         int slg_choxacnhan = donhang_controller.get_solg_donhang("Chờ xác nhận");
@@ -819,18 +843,17 @@ public class MainBoard extends javax.swing.JFrame {
         dataset.addValue(slg_giaothanhcong, "", "Giao thành công");
         dataset.addValue(tong_slg, "", "Tổng");
 
-        
         JFreeChart chart = ChartFactory.createBarChart(
                 "Biểu đồ đơn hàng",
-                "", 
+                "",
                 "",
                 dataset
         );
 
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(JPanelChart.getSize()); 
-        JPanelChart.setLayout(new java.awt.BorderLayout()); 
-        JPanelChart.add(chartPanel, java.awt.BorderLayout.CENTER); 
+        chartPanel.setPreferredSize(JPanelChart.getSize());
+        JPanelChart.setLayout(new java.awt.BorderLayout());
+        JPanelChart.add(chartPanel, java.awt.BorderLayout.CENTER);
         JPanelChart.validate();
     }
     private void cbbRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbRoleActionPerformed
@@ -844,8 +867,7 @@ public class MainBoard extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
 
             txtUsername.setText(model.getValueAt(selectedRow, 1).toString());
-            txtPassword.setText(model.getValueAt(selectedRow, 2).toString());
-            String role = model.getValueAt(selectedRow, 3).toString();
+            String role = model.getValueAt(selectedRow, 2).toString();
             cbbRole.setSelectedItem(role);
         }
     }//GEN-LAST:event_tableMouseClicked
@@ -857,14 +879,14 @@ public class MainBoard extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "User name không được để trống");
             return;
         }
-        
+
     }//GEN-LAST:event_btnUser_XoaActionPerformed
 
     private void btnUser_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUser_SuaActionPerformed
         String username = txtUsername.getText();
-        String password = txtPassword.getText();
+        String password = new String(txtPassword.getPassword());
         String role = (String) cbbRole.getSelectedItem();
-        if (username.isEmpty() || password.isEmpty() || role.isEmpty()) {
+        if (username.isEmpty() || role.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Thông tin không được để trống");
             return;
         }
@@ -875,11 +897,22 @@ public class MainBoard extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION
         );
         if (confirmation == JOptionPane.YES_OPTION) {
-            if (user_controller.edit_user(new Users(username, password, role))) {
+
+            if (!password.isEmpty()) {
+                if (password.length() <= 3) {
+                    JOptionPane.showMessageDialog(this, "Mật khẩu thiết lập phải có độ dài kí tự lớn hơn 3");
+                    return;
+                }
+                user_controller.change_password(username, password);
+            }
+            if (user_controller.change_role(username, role)) {
                 JOptionPane.showMessageDialog(this, "Thay đổi thành công!!!");
                 ClearTxt();
                 loadData_user();
+
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra!!!");
         }
 
     }//GEN-LAST:event_btnUser_SuaActionPerformed
@@ -905,7 +938,7 @@ public class MainBoard extends javax.swing.JFrame {
             loadData_user();
             return;
         }
-        tableModel = new DefaultTableModel(new String[]{"User ID", "User name", "Password", "Role"}, 0) {
+        tableModel = new DefaultTableModel(new String[]{"User ID", "User name", "Role"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;  // Không cho phép chỉnh sửa ô
@@ -913,7 +946,7 @@ public class MainBoard extends javax.swing.JFrame {
         };
         try {
             for (Users u : user_controller.get_ds_timkiem(key_word)) {
-                tableModel.addRow(new Object[]{u.getUserId(), u.getUsername(), u.getPass(), u.getRole()});
+                tableModel.addRow(new Object[]{u.getUserId(), u.getUsername(), u.getRole()});
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainBoard.class.getName()).log(Level.SEVERE, null, ex);
@@ -925,8 +958,8 @@ public class MainBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         new QLDuLieu(user_logged).setVisible(true);
         this.dispose();
-        
-        
+
+
     }//GEN-LAST:event_btnQLDuLieuActionPerformed
 
     private void btnQLDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLDonHangActionPerformed
@@ -938,6 +971,11 @@ public class MainBoard extends javax.swing.JFrame {
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
+        // TODO add your handling code here:
+        new DoiMatKhau(user_logged).setVisible(true);
+    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
 
     /**
      * @param args the command line arguments
@@ -979,6 +1017,7 @@ public class MainBoard extends javax.swing.JFrame {
     private javax.swing.JPanel JPanelChart;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnDoiMatKhau;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnQLDonHang;
     private javax.swing.JButton btnQLDuLieu;
@@ -1029,7 +1068,7 @@ public class MainBoard extends javax.swing.JFrame {
     private javax.swing.JLabel lbUsername;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JTable table;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

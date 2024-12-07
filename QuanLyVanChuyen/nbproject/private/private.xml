@@ -12,11 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/view/QLDonHang.java</file>
             <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/controller/donHangController.java</file>
-            <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/view/QLDuLieu.java</file>
-            <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/view/Login.java</file>
-            <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/view/MainBoard.java</file>
-            <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/resources/icon.png</file>
+            <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/view/ChiTiet_DonHang.java</file>
+            <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/model/DonHang.java</file>
+            <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/model/XeVanChuyen.java</file>
+            <file>file:/C:/Users/Dell/OneDrive/Desktop/Project/Java/Java-Cuoi-Mon/QuanLyVanChuyen/src/controller/vanChuyenController.java</file>
         </group>
     </open-files>
 </project-private>
